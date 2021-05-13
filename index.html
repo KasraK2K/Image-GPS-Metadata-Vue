@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' data: blob:;"> -->
+  <!-- <script>var inline = 1;</script> -->
+  <title>Vue 2 CDN</title>
+  <!-- fonts -->
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&display=swap" rel="stylesheet">
+  <!-- Tailwind CSS -->
+  <link href="https://unpkg.com/tailwindcss@^2/dist/tailwind.min.css" rel="stylesheet" />
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="./assets/css/styles.css">
+</head>
+
+<body class="bg-gray-50">
+  <div id="app">
+    <div class="container mx-auto">
+      <!-- -------------------------- START: Container --------------------------- -->
+
+      <!-- page header -->
+      <div class="flex justify-center items-center">
+        <h1 class="text-4xl my-10 p-6 bg-white rounded-lg shadow-md text-gray-900 title">
+          {{ name }}
+        </h1>
+      </div>
+
+      <!-- form -->
+      <div class="bg-white mx-10 shadow-md rounded-lg p-6" v-if="navAccess" @dragover.prevent @drop.prevent>
+        <form action="uploader.php" method="post" enctype="multipart/form-data" @submit.prevent="submit"
+          class="flex flex-col md:flex-row">
+          <div class="mt-1 flex flex-row justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md flex-grow"
+            :class="borderColor" @click="chooseFiles()" @dragleave="fileDragOut" @dragover="fileDragIn"
+            @drop="dropFile">
+            <div class="space-y-1 text-center">
+              <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48"
+                aria-hidden="true">
+                <path
+                  d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02"
+                  stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+              <div class="flex text-sm text-gray-600">
+                <label for="image"
+                  class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500">
+                  <span>Upload an image</span>
+                </label>
+                <input id="image" name="image" type="file" class="sr-only" accept="image/x-png,image/gif,image/jpeg"
+                  @change="fileChanged" />
+                <p class="pl-1">or drag and drop</p>
+              </div>
+              <p class="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+              <p class="text-xs text-gray-700"><span class="text-xs text-indigo-600">{{ filename ? 'inputted file: ' :
+                  '' }}</span>{{ filename }}</p>
+            </div>
+          </div>
+
+          <div @click="clickSubmit"
+            class="flex justify-center items-center cursor-pointer al py-2 px-4 md:ml-2 mt-2 md:mt-0 text-xl text-white transition-all duration-150 ease-linear rounded-lg shadow outline-none bg-indigo-600 hover:bg-indigo-700 hover:shadow-lg focus:outline-none">
+            <button id="submit" class="md:transform md:rotate-90 flex-grow">Submit</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- render image -->
+      <div v-if="render && uploaded" class="mx-10 shadow-md rounded-lg p-6 mt-6">
+        <render :metadata="metadata" :src="render" />
+      </div>
+      <!-- --------------------------- END: Container ---------------------------- -->
+    </div>
+  </div>
+
+
+  <!-- --------------------------- Import Plugins ---------------------------- -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+  <script src="https://unpkg.com/exif-js@2.2.1"></script>
+  <!-- Import Vue.js -->
+  <script src="https://cdn.jsdelivr.net/npm/vue@3.0.11/dist/vue.global.prod.js"></script>
+  <!-- <script src="https://unpkg.com/vue@3.0.0-beta.12/dist/vue.global.js"></script> -->
+  <!-- Import App -->
+  <script src="./main.js"></script>
+  <!-- Import Components -->
+  <script src="./components/Render.js"></script>
+
+  <script>
+    app.mount("#app");
+  </script>
+</body>
+
+</html>
