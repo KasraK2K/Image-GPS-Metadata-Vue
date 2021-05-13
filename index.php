@@ -7,7 +7,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline' data: blob:;"> -->
   <!-- <script>var inline = 1;</script> -->
-  <title>Vue 2 CDN</title>
+  <title>Metadata Image Uploader</title>
   <!-- fonts -->
   <link rel="preconnect" href="https://fonts.gstatic.com" />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+128+Text&display=swap" rel="stylesheet" />
