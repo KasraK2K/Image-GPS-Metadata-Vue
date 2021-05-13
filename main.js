@@ -116,14 +116,14 @@ const app = Vue.createApp({
         fetch("/uploader.php", requestOptions)
           .then((response) => response.text())
           .then((result) => {
-            result = JSON.parse(result);
-            if (result.code === 200) {
+            resObj = JSON.parse(result);
+            if (resObj.code === 200) {
               this.uploaded = true;
-              this.render = result.url;
+              this.render = resObj.url;
             }
             Toast.fire({
-              icon: result.code === 200 ? "success" : "error",
-              title: result.message,
+              icon: resObj.code === 200 ? "success" : "error",
+              title: resObj.message,
             });
           })
           .catch((error) => console.log("error", error));
