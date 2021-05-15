@@ -13,7 +13,7 @@ app.component("render", {
           <p>}</p>
         </code>
       </div>
-      <img :src="src" alt="render image" class="max-h-96 my-auto pt-6 md:pt-0" />
+      <img :src="src" alt="render image" class="md:max-h-96 my-auto pt-6 md:pt-0" />
     </div>
   `,
   data() {
