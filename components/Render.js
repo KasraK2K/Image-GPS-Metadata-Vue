@@ -8,7 +8,7 @@ app.component("render", {
       <div class="w-full text-white">
         <code class="w-full" id="code">
           <p>{</p>
-          <p v-if="src">&nbsp; &nbsp; <span class="text-pink-500">route:</span> &quot;<a :href="route" target="_blank"><span class="text-green-500">{{ route }}</span></a>&quot;,</p>
+          <p v-if="src">&nbsp; &nbsp; <span class="text-pink-500">route:</span> &quot;<a :href="src" target="_blank"><span class="text-green-500">{{ src }}</span></a>&quot;,</p>
           <p v-for="detail in details">&nbsp; &nbsp; <span class="text-pink-500">{{ detail[0] }}:</span> &quot;<span class="text-green-500">{{ detail[1] }}</span>&quot;,</p>
           <p>}</p>
         </code>
@@ -23,13 +23,6 @@ app.component("render", {
   computed: {
     details() {
       return Object.entries(JSON.parse(JSON.stringify(this.metadata)));
-    },
-    route() {
-      if (document.location.href.slice(-1) === "/") {
-        return document.location.href.slice(0, -1) + this.src;
-      } else {
-        return document.location.href + this.src;
-      }
     },
   },
   mounted() {},
