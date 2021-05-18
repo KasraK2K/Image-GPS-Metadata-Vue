@@ -32,7 +32,7 @@
 
       <!-- form -->
       <div class="bg-white mx-10 shadow-md rounded-lg p-6" v-if="navAccess" @dragover.prevent @drop.prevent>
-        <form action="uploader.php" method="post" enctype="multipart/form-data" @submit.prevent="submit"
+        <form :action="baseUrl + '/uploader.php'" method="post" enctype="multipart/form-data" @submit.prevent="submit"
           class="flex flex-col md:flex-row">
           <div class="mt-1 flex flex-row justify-center px-6 pt-5 pb-6 border-2 border-dashed rounded-md flex-grow"
             :class="borderColor" @click="chooseFiles()" @dragleave="fileDragOut" @dragover="fileDragIn"
