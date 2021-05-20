@@ -1,3 +1,5 @@
+const baseUrl = 'http://localhost/metadata';
+
 const Toast = Swal.mixin({
   toast: true,
   position: "top-end",
@@ -114,13 +116,13 @@ const app = Vue.createApp({
       };
 
       if (canFormSubmit) {
-        fetch(this.baseUrl + "/uploader.php", requestOptions)
+        fetch(baseUrl + "/uploader.php", requestOptions)
           .then((response) => response.text())
           .then((result) => {
             resObj = JSON.parse(result);
             if (resObj.code === 200) {
               this.uploaded = true;
-              this.render = this.baseUrl + resObj.url;
+              this.render = baseUrl + resObj.url;
             }
             Toast.fire({
               icon: resObj.code === 200 ? "success" : "error",
@@ -158,8 +160,6 @@ const app = Vue.createApp({
         console.log(error);
       }
     );
-    const url = window.location.href;
-    this.baseUrl = url.slice(-1) === "/" ? url.slice(0, -1) : url;
     /* -------------------------------------------------------------------------- */
   },
 });
